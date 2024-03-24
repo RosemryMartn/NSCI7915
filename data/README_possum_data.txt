@@ -3,7 +3,9 @@ Metadata for possum_data.csv dataset
 
 possum_data.csv contains data collected for the testing of five proposed drivers of geographical body-size variation in the common brushtail possum, Trichosurus vulpecula, using 588 possum skull measurements.The five proposed drivers being tested were heat conservation, heat dissipation, seasonality, productivity and the ecologically and evolutionarily relevant net primary productivity (eNPP). 
 
-Dataset was reposited on the 23rd of March 2015 under the title "Data from: Lean-season primary productivity and heat dissipation as key drivers of geographic body-size variation in a widespread marsupial" in the DRYAD Digital Repository. 
+
+
+Dataset was reposited on the 23rd of March 2015 under the title "Data from: Lean-season primary productivity and heat dissipation as key drivers of geographic body-size variation in a widespread marsupial" in the DRYAD Digital Repository. 
 
 DOI for dataset: 
 https://doi.org/10.5061/dryad.gq264
