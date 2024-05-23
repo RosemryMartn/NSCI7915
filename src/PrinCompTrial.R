@@ -100,6 +100,7 @@ hyp1_reg <- lm(log_CBL~filtered_data$MinSeasNDVI)
 summary(hyp1_reg)
 plot(filtered_data$MinSeasNDVI,log_CBL, xlab = "MinSeasNDVI", ylab = "log(CBL)", col = "dodgerblue")
 abline(hyp1_reg, col = "blue3")
+t.test()
 
 hyp2_reg <- lm(log_CBL~filtered_data$SummerMaxTemp)
 summary(hyp2_reg)
