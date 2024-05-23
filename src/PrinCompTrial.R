@@ -19,7 +19,7 @@ numeric_data <- data[,sapply(data,is.numeric)]
 head(numeric_data)
 
 # Remove unwanted columns.
-filtered_data <- numeric_data[-c(2:3, 15:18, 28:30)]
+filtered_data <- numeric_data[-c(2:3, 15:18)]
 head(filtered_data)
 
 # Normalise the numeric data.
@@ -38,7 +38,7 @@ summary(normalised_data.pca)
 normalised_data.pca$loadings[,1:2]
 
 # Visualising PCA.
-fviz_eig(normalised_data.pca, addlabels = TRUE)
+fviz_eig(normalised_data.pca, addlabels = TRUE) + labs(title = NULL, x = 'Principle Components')
 fviz_pca_var(normalised_data.pca, col.var = "black")
 fviz_cos2(normalised_data.pca, choice = "var", axes = 1:2)
 fviz_pca_var(normalised_data.pca, col.var = "cos2", 
@@ -48,7 +48,7 @@ fviz_pca_var(normalised_data.pca, col.var = "cos2",
 
 head(raw_data)
 raw_data$CBL
-hist(log(raw_data$CBL), breaks = 30)
+hist(log(raw_data$CBL), breaks = 30, xlab = "log(CBL)", main = NULL)
 # Test for normality
 log_CBL <- log(raw_data$CBL)
 shapiro.test(log_CBL)
@@ -71,7 +71,7 @@ is.vector(lat)
 map(regions = "Australia", xlim = c(110,160), mar = c(1, 1, 1, 1))
 points(long,lat, cex = (log_CBL/4)^6, col = hsv(h = (log_CBL-min(log_CBL))/
                                                   (max(log_CBL)-min(log_CBL))))
-# example of geographic variation in size consistant with Bergmann's rule
+# example of geographic variation in size consistent with Bergmann's rule
 
 plot(rank(raw_data$`Soil bulk density (0  30 cm)`) , rank(raw_data$AnnualMinTemp))
 
@@ -93,3 +93,25 @@ summary(lm(log_CBL~princomp_score))
 
 plot(princomp_score, col = hsv(h = (log_CBL-min(log_CBL))/
                                 (max(log_CBL)-min(log_CBL))))
+
+plot(princomp_score[,1], (log_CBL), xlab = "Principal Component 1 Scores", ylab = "log(CBL)")
+
+hyp1_reg <- lm(log_CBL~filtered_data$MinSeasNDVI)
+summary(hyp1_reg)
+plot(filtered_data$MinSeasNDVI,log_CBL, xlab = "MinSeasNDVI", ylab = "log(CBL)", col = "dodgerblue")
+abline(hyp1_reg, col = "blue3")
+
+hyp2_reg <- lm(log_CBL~filtered_data$SummerMaxTemp)
+summary(hyp2_reg)
+plot(filtered_data$SummerMaxTemp,log_CBL, xlab = "Summer Maximum Temperature (°C)", ylab = "log(CBL)", col = "darkorange")
+abline(hyp2_reg, col = "sienna")
+
+hyp3_reg <- lm(log_CBL~filtered_data$AnnualRain)
+summary(hyp3_reg)
+plot(filtered_data$AnnualRain,log_CBL, xlab = "Annual Rain (mm)", ylab = "log(CBL)", col = "seagreen")
+abline(hyp3_reg, col = "darkolivegreen")
+
+hyp4_reg <- lm(log_CBL~filtered_data$`Soil nutrient availability`)
+summary(hyp4_reg) 
+plot(filtered_data$`Soil nutrient availability`,log_CBL, xlab = "Soil Nutrient Availability", ylab = "log(CBL)", col = 'violetred')
+abline(hyp4_reg, col = 'darkmagenta')
