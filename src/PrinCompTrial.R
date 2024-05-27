@@ -95,6 +95,9 @@ plot(princomp_score, col = hsv(h = (log_CBL-min(log_CBL))/
                                 (max(log_CBL)-min(log_CBL))))
 
 plot(princomp_score[,1], (log_CBL), xlab = "Principal Component 1 Scores", ylab = "log(CBL)")
+lm(log_CBL~princomp_score[,1])
+summary(lm(log_CBL~princomp_score[,1]))
+abline(lm(log_CBL~princomp_score[,1]))
 
 hyp1_reg <- lm(log_CBL~filtered_data$MinSeasNDVI)
 summary(hyp1_reg)
