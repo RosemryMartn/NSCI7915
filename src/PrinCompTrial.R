@@ -98,24 +98,62 @@ plot(princomp_score[,1], (log_CBL), xlab = "PCA 1", ylab = "log(CBL)")
 lm(log_CBL~princomp_score[,1])
 summary(lm(log_CBL~princomp_score[,1]))
 abline(lm(log_CBL~princomp_score[,1]))
+# Normality test
+residualsPCA <- lm(log_CBL~princomp_score[,1])$residuals
+shapiro.test(residualsPCA)
+# Homoscedasticity test
+fitted_valuesPCA <- lm(log_CBL~princomp_score[,1])$fitted.values
+plot(fitted_valuesPCA, residualsPCA, xlab = "Fitted Values", ylab = "Residuals",main = NULL) 
+abline(h = 0, col = "red")
 
+# Linear regression for MinSeasNDVI
 hyp1_reg <- lm(log_CBL~filtered_data$MinSeasNDVI)
 summary(hyp1_reg)
 plot(filtered_data$MinSeasNDVI,log_CBL, xlab = "MinSeasNDVI", ylab = "log(CBL)", col = "dodgerblue")
 abline(hyp1_reg, col = "blue3")
-t.test()
+# Normality test 
+residuals1 <- hyp1_reg$residuals
+shapiro.test(residuals1)
+# Homoscedasticity test
+fitted_values1 <- hyp1_reg$fitted.values
+plot(fitted_values1, residuals1, xlab = "Fitted Values", ylab = "Residuals",main = NULL) 
+abline(h = 0, col = "red")
 
+# Linear regression for SummerMaxTemp
 hyp2_reg <- lm(log_CBL~filtered_data$SummerMaxTemp)
 summary(hyp2_reg)
 plot(filtered_data$SummerMaxTemp,log_CBL, xlab = "Summer Maximum Temperature (°C)", ylab = "log(CBL)", col = "darkorange")
 abline(hyp2_reg, col = "sienna")
+# Normality test
+residuals2 <- hyp2_reg$residuals
+shapiro.test(residuals2)
+# Homoscedasticity test
+fitted_values2 <- hyp2_reg$fitted.values
+plot(fitted_values2, residuals2, xlab = "Fitted Values",  ylab = "Residuals", main = NULL)
+abline(h = 0, col = "red")
 
+# Linear regression for AnnualRain
 hyp3_reg <- lm(log_CBL~filtered_data$AnnualRain)
 summary(hyp3_reg)
 plot(filtered_data$AnnualRain,log_CBL, xlab = "Annual Rain (mm)", ylab = "log(CBL)", col = "seagreen")
 abline(hyp3_reg, col = "darkolivegreen")
+# Normality test
+residuals3 <- hyp3_reg$residuals
+shapiro.test(residuals3)
+# Homoscedasticity test
+fitted_values3 <- hyp3_reg$fitted.values
+plot(fitted_values3, residuals3, xlab = "Fitted Values",  ylab = "Residuals", main = NULL)
+abline(h = 0, col = "red")
 
+# Linear regression for Soil Nutrrient Availability
 hyp4_reg <- lm(log_CBL~filtered_data$`Soil nutrient availability`)
 summary(hyp4_reg) 
 plot(filtered_data$`Soil nutrient availability`,log_CBL, xlab = "Soil Nutrient Availability", ylab = "log(CBL)", col = 'violetred')
 abline(hyp4_reg, col = 'darkmagenta')
+# Normality test
+residuals4 <- hyp4_reg$residuals
+shapiro.test(residuals4)
+# Homoscedasticity test
+fitted_values4 <- hyp4_reg$fitted.values
+plot(fitted_values4, residuals4, xlab = "Fitted Values",  ylab = "Residuals", main = NULL)
+abline(h = 0, col = "red")

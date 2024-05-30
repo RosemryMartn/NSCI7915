@@ -27,6 +27,5 @@ is.vector(lat)
 map(regions = "Australia", xlim = c(110,160), mar = c(1, 1, 1, 1))
 points(long,lat, cex = (log_CBL/4)^6, col = hsv(h = (log_CBL-min(log_CBL))/
                                                   (max(log_CBL)-min(log_CBL))))
-# example of geographic variation in size consistant with Bergmann's rule
+#example of geographic variation in size consistant with Bergmann's rule
 
-plot()
